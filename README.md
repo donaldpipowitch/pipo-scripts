@@ -1,2 +1,3 @@
-# pipo-scripts
-A toolbox of useful scripts and configs.
+# `pipo-scripts`
+
+> A toolbox of useful scripts and configs.

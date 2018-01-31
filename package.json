@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "scripts": {
+    "release": "workspace-version"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "2.7.2",
+    "workspace-release": "^0.4.3"
+  }
+}

@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "9"
+  - "8"
+
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.3.2
+  - export PATH="$HOME/.yarn/bin:$PATH"
+cache:
+  yarn: true  
+
+script:
+  # publish on tag
+  - if [ -n "$TRAVIS_TAG" ]; then node node_modules/.bin/workspace-publish; fi
+
+env:
+  global:
+    # encrypted NPM_TOKEN
+    secure: DdCle7tcGNQLc5ADQ8+GtJRzxnQjta4kpsJOEpC9rfohLkV6eF7+b/qE0IIDm6VLjSrHFGm2J0mdNCbntz0zSgOQdd+nq9DCqSds18QfCU0UXER1G3tOgpJN+Fn4Z+NSN2oDwQLVfCw47xy9bFa1mMTe8to7ASMDrD8rSa67ejefAtKIM2TiUXTuO6HgrP1tDz3qMK2RjATXPUvAQaT/BfZO/+2ERIuWH40IrL8UMt2boL2odDFHpAyXMAwYfCxWnJFQn5p/WAzKsR8oZtPN93rpFfqmAkF7KzBHuvnQczoIvfnkyrzjpb3WPeymtmjIY9IYOmCeI6+pK7V23HxRVABd81sp3XJVmVkMFhcd9QSBGkqpj0UMx4rp3XVavL2+M63vX44Otop9lJi4X0KSuTGo7xBjKQwtuJUbW0xLXka69qmrDiL8v1u4z+8T137zkYe5td1aBpU7JTTy9ntPRqOYZQelb3v05KNVDAp8Ln/9QVI5HwctXmMfFLouLgq8vs1s1S3dT4OgL0SNJkbpMiqbmtOKwb/YkBO7BAUS21L0Mdt33ZUN/jwOWyIE5j/pRkKsLhMN3to808H4dIoKYccF77WkBVdPovp2wsyltgj6OKeWDO0y9iCPUHJ5puhlikma5OtA5jLK02owHvJ8Zq+IbXLSMNI36sKhOoWs6hs=
