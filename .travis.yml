@@ -10,8 +10,15 @@ cache:
   yarn: true  
 
 script:
-  # publish on tag
-  - if [ -n "$TRAVIS_TAG" ]; then node node_modules/.bin/workspace-publish; fi
+  - echo "TODO: run tests"
+
+jobs:
+  include:
+    - stage: deploy
+      script:
+        # publish on tag
+        - if [ -n "$TRAVIS_TAG" ]; then node node_modules/.bin/workspace-publish; fi
+      node: "9"
 
 env:
   global:
