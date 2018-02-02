@@ -1,5 +1,6 @@
 The changelog is currently handwritten.
 
+# 0.1.2 (2018-02-02)
 # 0.1.1 (2018-02-02)
 
 - Just a test release for CI.
