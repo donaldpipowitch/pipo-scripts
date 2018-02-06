@@ -3,7 +3,8 @@
   "version": "0.1.2",
   "license": "MIT",
   "files": [
-    "prettier.config.js"
+    "build.js",
+    "prettier.js"
   ],
   "engines": {
     "node": ">=8.9.0"
@@ -16,5 +17,24 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/donaldpipowitch/pipo-scrips"
+  },
+  "dependencies": {
+    "@babel/core": "^7.0.0-beta.39",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.39",
+    "@babel/plugin-proposal-decorators": "^7.0.0-beta.39",
+    "@babel/preset-env": "^7.0.0-beta.39",
+    "@babel/preset-react": "^7.0.0-beta.39",
+    "@babel/preset-stage-0": "^7.0.0-beta.39",
+    "@babel/preset-typescript": "^7.0.0-beta.39",
+    "@types/node": "^9.4.0",
+    "babel-loader": "^8.0.0-beta.0",
+    "clean-webpack-plugin": "^0.1.18",
+    "hard-source-webpack-plugin": "^0.6.0-alpha.6",
+    "lodash": "^4.17.5",
+    "prettier": "^1.10.2",
+    "ts-loader": "^4.0.0-beta.0",
+    "typescript": "^2.7.1",
+    "webpack": "^4.0.0-beta.0",
+    "webpack-cli": "^2.0.4"
   }
 }

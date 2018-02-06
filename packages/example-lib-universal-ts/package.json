@@ -1,0 +1,11 @@
+{
+  "name": "example-lib-universal-ts",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "webpack --config src/webpack.config.js"
+  },
+  "devDependencies": {
+    "pipo-scripts": "*"
+  }
+}
