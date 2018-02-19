@@ -1,4 +1,4 @@
-const { existsSync } = require('fs');
+const { existsSync, outputFileSync } = require('fs-extra');
 const { join } = require('path');
 const { camelCase } = require('lodash');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -40,6 +40,32 @@ function getBabelConfig() {
   }
 }
 
+class OutputWebpackBuild {
+  // constructor(options) {
+  //   this.options = options;
+  // }
+
+  apply(compiler) {
+    const { emit } = compiler.hooks;
+    emit.tap(this.constructor.name, (compilation) => {
+      compilation.modules.forEach((module) => {
+        module.dependencies.forEach((dependency) => {
+          if (dependency.type === 'harmony init') {
+            const filename = dependency.originModule.userRequest.replace(
+              process.cwd(),
+              ''
+            );
+            outputFileSync(
+              join('dist-webpack', `${filename}.js`),
+              dependency.originModule._source._value
+            );
+          }
+        });
+      });
+    });
+  }
+}
+
 module.exports = {
   entry: getEntry(),
   output: {
@@ -59,7 +85,9 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist'], { verbose: false, root: cwd }),
-    new HardSourceWebpackPlugin()
+    new CleanWebpackPlugin(['dist-webpack'], { verbose: false, root: cwd }),
+    new HardSourceWebpackPlugin(),
+    new OutputWebpackBuild()
     // new HtmlWebpackPlugin({
     //   template: 'src/index.html'
     // })

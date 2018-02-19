@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "release": "workspace-version",
-    "build": "yarn wsrun build --serial --exclude pipo-scripts"
+    "build": "yarn wsrun build --serial --exclude-missing"
   },
   "workspaces": [
     "packages/*"

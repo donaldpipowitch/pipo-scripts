@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "webpack --config src/webpack.config.js"
+    "build": "webpack --config src/webpack.config.js",
+    "debug:build": "inspect-brk build webpack"
   },
   "devDependencies": {
+    "inspect-brk": "^0.1.0",
     "pipo-scripts": "*"
   }
 }
