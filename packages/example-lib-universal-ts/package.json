@@ -1,6 +1,7 @@
 {
   "name": "example-lib-universal-ts",
   "version": "1.0.0",
+  "main": "dist",
   "private": true,
   "scripts": {
     "build": "webpack --config src/webpack.config.js",

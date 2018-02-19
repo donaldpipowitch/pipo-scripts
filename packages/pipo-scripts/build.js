@@ -1,43 +1,32 @@
 const { existsSync, outputFileSync } = require('fs-extra');
 const { join } = require('path');
 const { camelCase } = require('lodash');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const cwd = process.cwd();
-const inCwd = (file) => join(cwd, file);
-const project = require(inCwd('package.json'));
+const joinCwd = (file) => join(cwd, file);
+const project = require(joinCwd('package.json'));
 
-function getEntry() {
-  const tsx = './src/index.tsx';
-  const ts = './src/index.ts';
-  const js = './src/index.js';
-  if (existsSync(inCwd(tsx))) {
-    return tsx;
-  } else if (existsSync(inCwd(ts))) {
-    return ts;
-  } else {
-    return js;
+function findFile(files) {
+  for (const file of files) {
+    if (existsSync(file)) {
+      return file;
+    }
   }
 }
 
+function getEntry() {
+  const files = ['./src/index.tsx', './src/index.ts', './src/index.js'];
+  return findFile(files);
+}
+
 function getBabelConfig() {
-  const srcJson = 'src/.babelrc';
-  const srcJs = 'src/.babelrc.js';
-  const json = '.babelrc';
-  const js = '.babelrc.js';
-  if (existsSync(inCwd(srcJson))) {
-    return require(inCwd(srcJson));
-  } else if (existsSync(inCwd(srcJs))) {
-    return require(inCwd(srcJs));
-  } else if (existsSync(inCwd(json))) {
-    return require(inCwd(json));
-  } else if (existsSync(inCwd(js))) {
-    return require(inCwd(js));
-  } else {
-    return require('./build.babelrc');
-  }
+  const files = ['src/.babelrc', 'src/.babelrc.js', '.babelrc', '.babelrc.js'];
+  const file = findFile(files);
+  const config = file ? joinCwd(file) : './build.babelrc';
+  return require(config);
 }
 
 class OutputWebpackBuild {
@@ -66,13 +55,12 @@ class OutputWebpackBuild {
   }
 }
 
-module.exports = {
+const isWebApp = existsSync('src/index.html');
+
+const config = {
   entry: getEntry(),
   output: {
-    filename: 'index.js',
-    libraryTarget: 'commonjs2'
-    // library: camelCase(project.name),
-    // libraryTarget: 'umd' // throws `window is not defined` when required by node
+    filename: 'index.js'
   },
   module: {
     rules: [
@@ -88,12 +76,21 @@ module.exports = {
     new CleanWebpackPlugin(['dist-webpack'], { verbose: false, root: cwd }),
     new HardSourceWebpackPlugin(),
     new OutputWebpackBuild()
-    // new HtmlWebpackPlugin({
-    //   template: 'src/index.html'
-    // })
   ],
   mode: 'production',
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   }
 };
+
+if (isWebApp) {
+  config.plugins.push(
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    })
+  );
+} else {
+  config.output.libraryTarget = 'commonjs2';
+}
+
+module.exports = config;

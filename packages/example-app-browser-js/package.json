@@ -1,7 +1,6 @@
 {
-  "name": "example-lib-universal-js",
+  "name": "example-app-browser-js",
   "version": "1.0.0",
-  "main": "dist",
   "private": true,
   "scripts": {
     "build": "webpack --config src/webpack.config.js",
@@ -10,5 +9,9 @@
   "devDependencies": {
     "inspect-brk": "^0.1.0",
     "pipo-scripts": "*"
+  },
+  "dependencies": {
+    "example-lib-universal-js": "*",
+    "example-lib-universal-ts": "*"
   }
 }
