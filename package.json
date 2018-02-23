@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "release": "workspace-version",
-    "build": "yarn wsrun build --serial --exclude-missing"
+    "build": "yarn wsrun build --serial --exclude-missing",
+    "start": "yarn wsrun start --exclude-missing"
   },
   "workspaces": [
     "packages/*"

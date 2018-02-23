@@ -36,6 +36,7 @@ class OutputWebpackBuild {
 
   apply(compiler) {
     const { emit } = compiler.hooks;
+    // use `emit.tapPromise`, if I use an async function
     emit.tap(this.constructor.name, (compilation) => {
       compilation.modules.forEach((module) => {
         module.dependencies.forEach((dependency) => {
