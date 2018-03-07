@@ -5,7 +5,7 @@
   "scripts": {
     "build": "webpack --config src/webpack.config.js",
     "debug:build": "inspect-brk build webpack",
-    "start": "webpack-serve --config src/webpack.config.js --port 8080 --open"
+    "start": "webpack-serve --config src/webpack.config.js --open"
   },
   "devDependencies": {
     "inspect-brk": "^0.1.0",

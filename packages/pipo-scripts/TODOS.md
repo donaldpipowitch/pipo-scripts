@@ -1,0 +1,9 @@
+- update all deps
+- add unit tests with jest
+- add linter (how? all linters seperated or as a jest runner or...)
+- add e2e tests with puppeteer and jest
+- generate typings
+- add example-app-node-*
+- add example-app-*-vanilla
+- add assets to app-* examples for css/img/font... loader
+- different repos: custom eslint plugins for missing dependency in package.json and unused vars using typescript compiler?

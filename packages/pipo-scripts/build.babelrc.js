@@ -4,9 +4,8 @@ module.exports = {
       '@babel/preset-env',
       {
         targets: {
-          // browsers: ['last 2 versions', 'Firefox ESR', 'ie >= 11']
-          browsers: 'last 2 versions, Firefox ESR, ie >= 11'
-          // node: '6.10'
+          browsers: 'last 2 versions, Firefox ESR, ie >= 11',
+          node: '6.10' // still v6, because of AWS Lambas
           // ...android, ios, electron
         },
         modules: false,
