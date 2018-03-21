@@ -79,8 +79,20 @@ const config = {
     new OutputWebpackBuild()
   ],
   mode: 'production',
+  // target: 'node', // trigger based on targets of babelrc?
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
+  },
+  resolveLoader: {
+    modules: [
+      // to better support `$ yarn/npm link pipo-scripts` we'll look for loaders
+      // which are relative to this package (or its workspace root)
+      join(__dirname, 'node_modules'),
+      // note: if pipo-scripts is installed normally the next two lines should
+      // point to the same directory
+      join(__dirname, '../../node_modules'),
+      'node_modules'
+    ]
   }
 };
 
