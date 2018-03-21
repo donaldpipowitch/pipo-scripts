@@ -1,4 +1,24 @@
-module.exports = {
+// allow yarn/npm to link pipo-scripts
+function resolveByKey(config, key) {
+  if (Array.isArray(config[key])) {
+    config[key] = config[key].map((item) => {
+      if (Array.isArray(item)) {
+        item[0] = require.resolve(item[0]);
+        return item;
+      } else {
+        return require.resolve(item);
+      }
+    });
+  }
+}
+
+function resolve(config) {
+  resolveByKey(config, 'presets');
+  resolveByKey(config, 'plugins');
+  return config;
+}
+
+module.exports = resolve({
   presets: [
     [
       '@babel/preset-env',
@@ -20,4 +40,4 @@ module.exports = {
     '@babel/plugin-proposal-decorators',
     ['@babel/plugin-proposal-class-properties', { loose: true }]
   ]
-};
+});

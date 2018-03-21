@@ -2,7 +2,11 @@
   "name": "pipo-scripts",
   "version": "0.1.2",
   "license": "MIT",
+  "bin": {
+    "pipo-scripts-build": "bin/pipo-scripts-build"
+  }, 
   "files": [
+    "bin",
     "build.js",
     "prettier.js"
   ],
@@ -19,13 +23,13 @@
     "url": "https://github.com/donaldpipowitch/pipo-scrips"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.39",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.39",
-    "@babel/plugin-proposal-decorators": "^7.0.0-beta.39",
-    "@babel/preset-env": "^7.0.0-beta.39",
-    "@babel/preset-react": "^7.0.0-beta.39",
-    "@babel/preset-stage-0": "^7.0.0-beta.39",
-    "@babel/preset-typescript": "^7.0.0-beta.39",
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.42",
+    "@babel/plugin-proposal-decorators": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "@babel/preset-react": "^7.0.0-beta.42",
+    "@babel/preset-stage-0": "^7.0.0-beta.42",
+    "@babel/preset-typescript": "^7.0.0-beta.42",
     "@types/node": "^9.4.0",
     "babel-loader": "^8.0.0-beta.0",
     "clean-webpack-plugin": "^0.1.18",
