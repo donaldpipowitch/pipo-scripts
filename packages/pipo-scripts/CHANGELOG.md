@@ -1,5 +1,11 @@
 The changelog is currently handwritten.
 
+# HEAD
+
+- Added webpack config to build simple web and Node projects with JS, TS and CSS.
+- Support hot module reloading.
+- Added examples.
+
 # 0.1.2 (2018-02-02)
 # 0.1.1 (2018-02-02)
 

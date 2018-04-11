@@ -4,6 +4,7 @@ const { camelCase } = require('lodash');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const cwd = process.cwd();
 const joinCwd = (file) => join(cwd, file);
@@ -58,6 +59,16 @@ class OutputWebpackBuild {
 
 const isWebApp = existsSync('src/index.html');
 
+const stats = {
+  assets: false,
+  builtAt: false,
+  children: false,
+  entrypoints: false,
+  hash: false,
+  modules: false,
+  version: false
+};
+
 const config = {
   entry: getEntry(),
   output: {
@@ -69,14 +80,25 @@ const config = {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: [{ loader: 'babel-loader', options: getBabelConfig() }]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: process.env.WEBPACK_SERVE
+              ? 'style-loader'
+              : MiniCssExtractPlugin.loader
+          },
+          { loader: 'css-loader' }
+        ]
       }
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], { verbose: false, root: cwd }),
-    new CleanWebpackPlugin(['dist-webpack'], { verbose: false, root: cwd }),
-    new HardSourceWebpackPlugin(),
-    new OutputWebpackBuild()
+    new CleanWebpackPlugin(['dist'], { verbose: false, root: cwd })
+    // new CleanWebpackPlugin(['dist-webpack'], { verbose: false, root: cwd }),
+    // new HardSourceWebpackPlugin(),
+    // new OutputWebpackBuild()
   ],
   mode: 'production',
   // target: 'node', // trigger based on targets of babelrc?
@@ -93,8 +115,18 @@ const config = {
       join(__dirname, '../../node_modules'),
       'node_modules'
     ]
-  }
+  },
+  stats
 };
+
+if (process.env.WEBPACK_SERVE) {
+  config.mode = 'development';
+  config.serve = {
+    dev: { stats }
+  };
+} else {
+  config.plugins.push(new MiniCssExtractPlugin());
+}
 
 if (isWebApp) {
   config.plugins.push(
