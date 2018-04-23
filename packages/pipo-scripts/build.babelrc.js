@@ -33,11 +33,11 @@ module.exports = resolve({
       }
     ],
     '@babel/preset-react',
-    '@babel/preset-stage-0',
+    ['@babel/preset-stage-0', { decoratorsLegacy: true }],
     '@babel/preset-typescript'
   ],
   plugins: [
-    '@babel/plugin-proposal-decorators',
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
     ['@babel/plugin-proposal-class-properties', { loose: true }]
   ]
 });

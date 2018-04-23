@@ -5,14 +5,12 @@ const { execSync } = require('child_process');
 // resolve executables and our config to allow `$ yarn/npm link pipo-scripts` in more cases
 // not beautiful, but simple and works for now
 // if you use the linked version for testing, run `$ node node_modules/pipo-scripts/bin/<your-command>`
-const webpack = require
-  .resolve('webpack')
-  .replace('lib/webpack.js', 'bin/webpack.js');
+const webpack = require.resolve('webpack-cli');
 const config = join(__dirname, '../build.js');
 const [node, script, ...params] = process.argv;
 
 try {
-  execSync(`node ${webpack} --config ${config}  ${params.join(' ')}`, {
+  execSync(`node ${webpack} --config ${config} ${params.join(' ')}`, {
     stdio: 'inherit'
   });
 } catch (err) {

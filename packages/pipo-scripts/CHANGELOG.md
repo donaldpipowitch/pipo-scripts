@@ -2,9 +2,10 @@ The changelog is currently handwritten.
 
 # HEAD
 
-- Added webpack config to build simple web and Node projects with JS, TS and CSS.
+- Added webpack config to build simple web and Node projects with JS, TS, CSS and other assets.
 - Support hot module reloading.
 - Added examples.
+- Aliased copy-loader.
 
 # 0.1.2 (2018-02-02)
 # 0.1.1 (2018-02-02)
