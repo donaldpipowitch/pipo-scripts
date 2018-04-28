@@ -8,6 +8,7 @@
     "start": "webpack-serve --config src/webpack.config.js --open"
   },
   "devDependencies": {
+    "@types/webpack-env": "^1.13.6",
     "inspect-brk": "^0.1.0",
     "pipo-scripts": "*"
   },

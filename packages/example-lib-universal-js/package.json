@@ -1,14 +1,16 @@
 {
   "name": "example-lib-universal-js",
   "version": "1.0.0",
-  "main": "dist",
+  "main": "dist/umd",
+  "module": "dist/module",
   "private": true,
   "scripts": {
-    "build": "webpack --config src/webpack.config.js",
-    "debug:build": "inspect-brk build webpack"
+    "build": "rollup --config src/rollup.config.js",
+    "debug:build": "inspect-brk build rollup"
   },
   "devDependencies": {
     "inspect-brk": "^0.1.0",
-    "pipo-scripts": "*"
+    "pipo-scripts": "*",
+    "rollup": "^0.58.2"
   }
 }

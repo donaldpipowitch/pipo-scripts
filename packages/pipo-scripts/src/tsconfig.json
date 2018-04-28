@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    // "esModuleInterop": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "strict": true,
     "target": "es6",
+    "module": "commonjs",
+    "outDir": "../dist",
     "types": [
       "@types/node"
     ]

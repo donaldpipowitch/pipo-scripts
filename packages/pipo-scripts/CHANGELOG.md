@@ -2,6 +2,11 @@ The changelog is currently handwritten.
 
 # HEAD
 
+- Added some fallbacks for old projects.
+- Use rollup for libs.
+
+# 0.2.0 (2018-04-23)
+
 - Added webpack config to build simple web and Node projects with JS, TS, CSS and other assets.
 - Support hot module reloading.
 - Added examples.

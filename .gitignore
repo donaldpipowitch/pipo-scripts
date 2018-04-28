@@ -2,3 +2,5 @@ node_modules/
 dist/
 dist-webpack/
 *.log
+# for rollup libs
+.rpt2_cache

@@ -1,34 +1,10 @@
-const { existsSync, outputFileSync } = require('fs-extra');
-const { join } = require('path');
-const { camelCase } = require('lodash');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-const cwd = process.cwd();
-const joinCwd = (file) => join(cwd, file);
-const project = require(joinCwd('package.json'));
-
-function findFile(files) {
-  for (const file of files) {
-    if (existsSync(file)) {
-      return file;
-    }
-  }
-}
-
-function getEntry() {
-  const files = ['./src/index.tsx', './src/index.ts', './src/index.js'];
-  return findFile(files);
-}
-
-function getBabelConfig() {
-  const files = ['src/.babelrc', 'src/.babelrc.js', '.babelrc', '.babelrc.js'];
-  const file = findFile(files);
-  const config = file ? joinCwd(file) : './build.babelrc';
-  return require(config);
-}
+import { existsSync } from 'fs-extra';
+import { join } from 'path';
+import { Configuration } from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { getBabelConfig, getEntry, cwd } from './files';
 
 // class OutputWebpackBuild {
 //   // constructor(options) {
@@ -69,7 +45,7 @@ const stats = {
   version: false
 };
 
-const config = {
+const config: Configuration = {
   entry: getEntry(),
   output: {
     filename: 'index.js'
@@ -77,13 +53,35 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx|ts|tsx)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        // include: join(cwd, 'src'),
         use: [
           {
             loader: 'babel-loader',
             options: getBabelConfig()
+          }
+        ]
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        // no exclude of node_modules for old projects
+        use: [
+          {
+            loader: 'babel-loader',
+            options: getBabelConfig()
+          },
+          {
+            loader: 'ts-loader'
+          }
+        ]
+      },
+      // fallback for old projects
+      {
+        type: 'javascript/auto',
+        test: /manifest\.json$/,
+        use: [
+          {
+            loader: 'file-loader'
           }
         ]
       },
@@ -93,7 +91,7 @@ const config = {
           {
             loader: process.env.WEBPACK_SERVE
               ? 'style-loader'
-              : MiniCssExtractPlugin.loader
+              : (MiniCssExtractPlugin.loader as any)
           },
           { loader: 'css-loader' }
         ]
@@ -116,16 +114,12 @@ const config = {
       }
     ]
   },
-  plugins: [
-    new CleanWebpackPlugin(['dist'], { verbose: false, root: cwd })
-    // new CleanWebpackPlugin(['dist-webpack'], { verbose: false, root: cwd }),
-    // new HardSourceWebpackPlugin(),
-    // new OutputWebpackBuild()
-  ],
+  plugins: [new CleanWebpackPlugin(['dist'], { verbose: false, root: cwd })],
   mode: 'production',
   // target: 'node', // trigger based on targets of babelrc?
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    // for old projects
     mainFields: [
       'webpack',
       // defaults
@@ -147,32 +141,30 @@ const config = {
     ],
     alias: {
       // see https://www.npmjs.com/package/copy-loader
-      ['copy-loader']: `file-loader?name=[path][name].[ext]&context=./${join(
-        cwd,
-        'src'
-      )}`
+      ['copy-loader']: 'file-loader?name=[path][name].[ext]&context=./src'
     }
   },
   stats
 };
 
+// fooo
+config.mode = 'development';
+
 if (process.env.WEBPACK_SERVE) {
   config.mode = 'development';
-  config.serve = {
+  (config as any).serve = {
     dev: { stats }
   };
 } else {
-  config.plugins.push(new MiniCssExtractPlugin());
+  config.plugins!.push(new MiniCssExtractPlugin());
 }
 
 if (isWebApp) {
-  config.plugins.push(
+  config.plugins!.push(
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     })
   );
-} else {
-  config.output.libraryTarget = 'commonjs2';
 }
 
-module.exports = config;
+export default config;

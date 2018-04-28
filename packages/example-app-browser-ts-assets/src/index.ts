@@ -10,5 +10,5 @@ const app = document.getElementById('app');
 app.innerText = `Hello world from ts app! 1 + 1 = ${two} and 2 * 2 = ${four}.`;
 
 if (module.hot) {
-  module.hot.accept(location.reload);
+  module.hot.accept((err) => location.reload());
 }
