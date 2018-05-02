@@ -11,7 +11,7 @@ cache:
 
 script:
   - yarn build
-  - yarn tests
+  - yarn test
 
 jobs:
   include:
