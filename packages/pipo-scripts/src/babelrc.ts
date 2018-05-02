@@ -1,5 +1,6 @@
 // allow yarn/npm to link pipo-scripts
 function resolveByKey(config: any, key: string) {
+  if (!config[key]) return;
   if (Array.isArray(config[key])) {
     config[key] = config[key].map((item: any) => {
       if (Array.isArray(item)) {
@@ -15,6 +16,12 @@ function resolveByKey(config: any, key: string) {
 function resolve(config: any) {
   resolveByKey(config, 'presets');
   resolveByKey(config, 'plugins');
+  if (config.env) {
+    Object.values(config.env).forEach((envConfig) => {
+      resolveByKey(envConfig, 'presets');
+      resolveByKey(envConfig, 'plugins');
+    });
+  }
   return config;
 }
 
@@ -39,5 +46,10 @@ module.exports = resolve({
     'babel-plugin-transform-decorators-legacy'
     // ['@babel/plugin-proposal-decorators', { legacy: true }],
     // ['@babel/plugin-proposal-class-properties', { loose: true }]
-  ]
+  ],
+  env: {
+    test: {
+      plugins: ['babel-plugin-transform-es2015-modules-commonjs']
+    }
+  }
 });
