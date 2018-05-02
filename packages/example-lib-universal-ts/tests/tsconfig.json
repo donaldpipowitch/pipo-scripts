@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    // "esModuleInterop": true,
+    "experimentalDecorators": true,
+    // "moduleResolution": "node",
+    // "strict": true,
+    // "target": "es6",
+    // "declaration": true,
+    // "declarationDir": "../dist/typings",
+    "types": [
+      "@types/jest"
+    ]
+  }
+}

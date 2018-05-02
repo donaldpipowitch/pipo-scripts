@@ -4,7 +4,7 @@ The changelog is currently handwritten.
 
 - Added some fallbacks for old projects.
 - Use rollup for libs.
-- Added Jest (only JS for now).
+- Added Jest.
 
 # 0.2.0 (2018-04-23)
 
