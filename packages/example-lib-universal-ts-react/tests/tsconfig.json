@@ -1,12 +1,8 @@
 {
   "compilerOptions": {
-    // "esModuleInterop": true,
     "experimentalDecorators": true,
-    // "moduleResolution": "node",
-    // "strict": true,
-    // "target": "es6",
-    // "declaration": true,
-    // "declarationDir": "../dist/typings",
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
     "types": [
       "@types/jest"
     ]

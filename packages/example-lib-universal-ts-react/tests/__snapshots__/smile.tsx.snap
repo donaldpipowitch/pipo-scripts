@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render <Smile /> 1`] = `
+<div
+  className="smile"
+/>
+`;
