@@ -3,7 +3,7 @@ The changelog is currently handwritten.
 # HEAD
 
 - Added some fallbacks for old projects.
-- Use rollup for libs.
+- Use Babel for libs.
 - Added Jest.
 
 # 0.2.0 (2018-04-23)

@@ -1,4 +1,2 @@
-import { divide } from './divide';
-import { multiply } from './multiply';
-
-export { divide, multiply };
+export { divide } from './divide';
+export { multiply } from './multiply';

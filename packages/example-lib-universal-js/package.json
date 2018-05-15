@@ -1,18 +1,20 @@
 {
   "name": "example-lib-universal-js",
   "version": "1.0.0",
-  "main": "dist/umd",
+  "main": "dist/commonjs",
   "module": "dist/module",
   "private": true,
   "scripts": {
-    "build": "rollup --config src/rollup.config.js",
-    "debug:build": "inspect-brk build rollup",
+    "build:module": "babel src --out-dir dist/module --delete-dir-on-start --copy-files",
+    "build:commonjs": "babel dist/module --out-dir dist/commonjs --delete-dir-on-start --copy-files --plugins @babel/plugin-transform-modules-commonjs",
+    "build": "yarn build:module && yarn build:commonjs",
+    "start": "yarn build:module --watch",
     "test": "jest --config tests/jest.config.js"
   },
   "devDependencies": {
-    "inspect-brk": "^0.1.0",
+    "@babel/cli": "7.0.0-beta.46",
+    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.46",
     "jest": "^22.4.3",
-    "pipo-scripts": "*",
-    "rollup": "^0.58.2"
+    "pipo-scripts": "link:../pipo-scripts"
   }
 }

@@ -25,10 +25,10 @@ function resolve(config: any) {
   return config;
 }
 
-module.exports = resolve({
+export const babel = resolve({
   presets: [
     [
-      'babel-preset-env',
+      '@babel/preset-env',
       {
         targets: {
           browsers: 'last 2 versions, Firefox ESR, ie >= 11'
@@ -36,20 +36,20 @@ module.exports = resolve({
           // ...android, ios, electron
         },
         modules: false,
-        useBuiltIns: true
+        useBuiltIns: 'usage'
       }
     ],
-    'babel-preset-react',
-    'babel-preset-stage-0'
+    '@babel/preset-react',
+    ['@babel/preset-stage-0', { decoratorsLegacy: true }],
+    '@babel/preset-typescript'
   ],
   plugins: [
-    'babel-plugin-transform-decorators-legacy'
-    // ['@babel/plugin-proposal-decorators', { legacy: true }],
-    // ['@babel/plugin-proposal-class-properties', { loose: true }]
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
+    ['@babel/plugin-proposal-class-properties', { loose: true }]
   ],
   env: {
     test: {
-      plugins: ['babel-plugin-transform-es2015-modules-commonjs']
+      plugins: ['@babel/plugin-transform-modules-commonjs']
     }
   }
 });

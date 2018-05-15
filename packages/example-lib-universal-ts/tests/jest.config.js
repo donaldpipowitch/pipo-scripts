@@ -1,1 +1,1 @@
-module.exports = require('pipo-scripts/dist/jest.config');
+module.exports = require('pipo-scripts').jest;

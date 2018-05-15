@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "inspect-brk": "^0.1.0",
-    "pipo-scripts": "*"
+    "pipo-scripts": "link:../pipo-scripts"
   },
   "dependencies": {
     "example-lib-universal-js": "*",

@@ -1,3 +1,4 @@
+- check source maps
 - update all deps
 - add unit tests with jest
 - add linter (how? all linters seperated or as a jest runner or...)

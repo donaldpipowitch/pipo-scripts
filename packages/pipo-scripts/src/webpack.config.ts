@@ -6,33 +6,6 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { getBabelConfig, getEntry, cwd } from './files';
 
-// class OutputWebpackBuild {
-//   // constructor(options) {
-//   //   this.options = options;
-//   // }
-
-//   apply(compiler) {
-//     const { emit } = compiler.hooks;
-//     // use `emit.tapPromise`, if I use an async function
-//     emit.tap(this.constructor.name, (compilation) => {
-//       compilation.modules.forEach((module) => {
-//         module.dependencies.forEach((dependency) => {
-//           if (dependency.type === 'harmony init') {
-//             const filename = dependency.originModule.userRequest.replace(
-//               process.cwd(),
-//               ''
-//             );
-//             outputFileSync(
-//               join('dist-webpack', `${filename}.js`),
-//               dependency.originModule._source._value
-//             );
-//           }
-//         });
-//       });
-//     });
-//   }
-// }
-
 const isWebApp = existsSync('src/index.html');
 
 const stats = {
@@ -45,7 +18,7 @@ const stats = {
   version: false
 };
 
-const config: Configuration = {
+const webpack: Configuration = {
   entry: getEntry(),
   output: {
     filename: 'index.js'
@@ -53,25 +26,12 @@ const config: Configuration = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
             options: getBabelConfig()
-          }
-        ]
-      },
-      {
-        test: /\.(ts|tsx)$/,
-        // no exclude of node_modules for old projects
-        use: [
-          {
-            loader: 'babel-loader',
-            options: getBabelConfig()
-          },
-          {
-            loader: 'ts-loader'
           }
         ]
       },
@@ -116,18 +76,8 @@ const config: Configuration = {
   },
   plugins: [new CleanWebpackPlugin(['dist'], { verbose: false, root: cwd })],
   mode: 'production',
-  // target: 'node', // trigger based on targets of babelrc?
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
-    // for old projects
-    mainFields: [
-      'webpack',
-      // defaults
-      // see https://github.com/webpack/webpack/blob/dc50c0360e87204ea77172910e877f8c510f3bfb/lib/WebpackOptionsDefaulter.js#L84
-      'browser',
-      'module',
-      'main'
-    ]
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   resolveLoader: {
     modules: [
@@ -141,30 +91,27 @@ const config: Configuration = {
     ],
     alias: {
       // see https://www.npmjs.com/package/copy-loader
-      ['copy-loader']: 'file-loader?name=[path][name].[ext]&context=./src'
+      'copy-loader': 'file-loader?name=[path][name].[ext]&context=./src'
     }
   },
   stats
 };
 
-// fooo
-config.mode = 'development';
-
 if (process.env.WEBPACK_SERVE) {
-  config.mode = 'development';
-  (config as any).serve = {
+  webpack.mode = 'development';
+  (webpack as any).serve = {
     dev: { stats }
   };
 } else {
-  config.plugins!.push(new MiniCssExtractPlugin());
+  webpack.plugins!.push(new MiniCssExtractPlugin());
 }
 
 if (isWebApp) {
-  config.plugins!.push(
+  webpack.plugins!.push(
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     })
   );
 }
 
-export default config;
+export { webpack };

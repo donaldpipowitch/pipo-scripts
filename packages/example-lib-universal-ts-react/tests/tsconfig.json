@@ -5,9 +5,10 @@
     // "moduleResolution": "node",
     // "strict": true,
     // "target": "es6",
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "declarationDir": "../dist/typings",
-    "types": []
+    // "declaration": true,
+    // "declarationDir": "../dist/typings",
+    "types": [
+      "@types/jest"
+    ]
   }
 }

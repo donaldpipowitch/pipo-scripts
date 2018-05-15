@@ -1,4 +1,4 @@
-module.exports = {
+export const jest = {
   testMatch: ['**/*.+(ts|tsx|js|jsx)'],
   // roots: ['<rootDir>/../src', '<rootDir>/../tests'],
   testPathIgnorePatterns: ['<rootDir>/jest.config.js'],

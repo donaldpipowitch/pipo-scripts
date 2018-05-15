@@ -26,6 +26,6 @@ export function getEntry() {
 export function getBabelConfig() {
   const files = ['src/.babelrc', 'src/.babelrc.js', '.babelrc', '.babelrc.js'];
   const file = findFile(files);
-  const config = file ? joinCwd(file) : './babelrc';
-  return require(config);
+  const config = file ? require(joinCwd(file)) : require('./babelrc').babel;
+  return config;
 }
