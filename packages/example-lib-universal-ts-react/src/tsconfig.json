@@ -4,6 +4,7 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "declaration": true,
+    "emitDeclarationOnly": true,
     "declarationDir": "../dist/typings",
     "types": []
   }
