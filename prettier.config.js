@@ -1,2 +1,1 @@
-module.exports = require("pipo-scripts").getPrettierConfig();
-// foo
+module.exports = require('pipo-scripts').getPrettierConfig();
