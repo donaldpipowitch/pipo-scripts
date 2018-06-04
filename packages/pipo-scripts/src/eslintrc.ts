@@ -8,9 +8,11 @@ export const getEslintConfig = () => ({
       jsx: true
     }
   },
-  plugins: ['import'],
+  extends: ['plugin:prettier/recommended'],
+  plugins: ['import', 'prettier'],
   rules: {
     'import/no-extraneous-dependencies': ['error'],
+    'prettier/prettier': 'error',
     'spaced-comment': ['error', 'always']
   }
 });
