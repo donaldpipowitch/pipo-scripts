@@ -2,6 +2,8 @@
   "recommendations": [
     // https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
     "esbenp.prettier-vscode",
+    // https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+    "dbaeumer.vscode-eslint",
     // https://marketplace.visualstudio.com/items?itemName=asvetliakov.snapshot-tools
     "asvetliakov.snapshot-tools"
   ]

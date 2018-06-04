@@ -1,1 +1,2 @@
-module.exports = require('./packages/pipo-scripts/prettier');
+module.exports = require("pipo-scripts").getPrettierConfig();
+// foo

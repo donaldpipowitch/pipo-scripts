@@ -13,7 +13,7 @@ function findFile(files: string[]) {
   }
 }
 
-export function getEntry() {
+export function findEntry() {
   const files = ['./src/index.tsx', './src/index.ts', './src/index.js'];
   const file = findFile(files);
   if (file) {
@@ -23,7 +23,7 @@ export function getEntry() {
   }
 }
 
-export function getBabelConfig() {
+export function findBabelConfig() {
   const files = ['src/.babelrc', 'src/.babelrc.js', '.babelrc', '.babelrc.js'];
   const file = findFile(files);
   const config = file ? require(joinCwd(file)) : require('./babelrc').babel;

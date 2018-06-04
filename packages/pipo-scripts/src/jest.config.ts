@@ -1,4 +1,4 @@
-export const jest = {
+export const getJestConfig = () => ({
   testMatch: ['**/*.+(ts|tsx|js|jsx)'],
   // roots: ['<rootDir>/../src', '<rootDir>/../tests'],
   testPathIgnorePatterns: ['<rootDir>/jest.config.js', '<rootDir>/__mocks__/'],
@@ -17,4 +17,4 @@ export const jest = {
       '<rootDir>/__mocks__/fileMock.js',
     '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js'
   }
-};
+});

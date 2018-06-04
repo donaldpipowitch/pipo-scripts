@@ -1,1 +1,1 @@
-module.exports = require('pipo-scripts').webpack;
+module.exports = require("pipo-scripts").getWebpackConfig();

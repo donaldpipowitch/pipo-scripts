@@ -1,1 +1,1 @@
-module.exports = require('pipo-scripts').babel;
+module.exports = require("pipo-scripts").getBabelConfig();

@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "tsc -p src",
-    "start": "tsc -p src -w"
+    "start": "tsc -p src -w",
+    "lint": "prettier-eslint --eslint-config-path ../../.eslintrc.js --write \"src/**/*.+(js|jsx|ts|tsx)\""
   },
   "files": [
     "bin",
@@ -44,6 +45,7 @@
     "babel-loader": "8.0.0-beta.2",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
+    "eslint-plugin-import": "^2.12.0",
     "file-loader": "^1.1.11",
     "fs-extra": "^5.0.0",
     "hard-source-webpack-plugin": "^0.6.0-alpha.6",
@@ -51,6 +53,7 @@
     "lodash": "^4.17.5",
     "mini-css-extract-plugin": "^0.4.0",
     "prettier": "^1.10.2",
+    "prettier-eslint": "^8.8.1",
     "style-loader": "^0.20.3",
     "ts-loader": "^4.2.0",
     "typescript": "^2.8.3",
@@ -62,6 +65,7 @@
   "devDependencies": {
     "@types/clean-webpack-plugin": "^0.1.2",
     "@types/html-webpack-plugin": "^2.30.3",
-    "@types/mini-css-extract-plugin": "^0.2.0"
+    "@types/mini-css-extract-plugin": "^0.2.0",
+    "prettier-eslint-cli": "^4.7.1"
   }
 }

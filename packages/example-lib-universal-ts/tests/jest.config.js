@@ -1,1 +1,1 @@
-module.exports = require('pipo-scripts').jest;
+module.exports = require("pipo-scripts").getJestConfig();

@@ -1,2 +1,2 @@
-import { babel } from './babelrc';
-module.exports = require('babel-jest').createTransformer(babel);
+import { getBabelConfig } from './babelrc';
+module.exports = require('babel-jest').createTransformer(getBabelConfig());
